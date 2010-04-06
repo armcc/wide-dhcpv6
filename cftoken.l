@@ -111,6 +111,7 @@ ecl		\}
 
 %s S_CNF
 %s S_IFACE
+%s S_PROFILE
 %s S_PREF
 %s S_HOST
 %s S_DUID
@@ -135,6 +136,15 @@ ecl		\}
 	yylval.str = strdup(yytext);
 	BEGIN S_CNF;
 	return (IFNAME);
+}
+
+	/* profile configuration */
+<S_CNF>profile { DECHO; BEGIN S_PROFILE; return (PROFILE); }
+<S_PROFILE>{string} {
+	DECHO;
+	yylval.str = strdup(yytext);
+	BEGIN S_CNF;
+	return (PROFILENAME);
 }
 
 	/* host configuration */
