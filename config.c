@@ -471,6 +471,7 @@ add_pd_pif(iapdc, cfl0)
 {
 	struct cf_list *cfl;
 	struct prefix_ifconf *pif;
+	int i;
 
 	/* duplication check */
 	for (pif = TAILQ_FIRST(&iapdc->iapd_pif_list); pif;
@@ -523,6 +524,10 @@ add_pd_pif(iapdc, cfl0)
 				    configfilename, cfl->line, pif->sla_len); 
 				goto bad;
 			}
+			break;
+		case IFPARAM_IFID:
+			for (i = sizeof(pif->ifid) -1; i >= 0; i--)
+				pif->ifid[i] = (cfl->num >> 8*(sizeof(pif->ifid) - 1 - i)) & 0xff;
 			break;
 		default:
 			debug_printf(LOG_ERR, FNAME, "%s:%d internal error: "
