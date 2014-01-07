@@ -52,6 +52,7 @@
 #include "cfparse.h"
 
 #define YY_NO_UNPUT 1
+#define YY_NO_INPUT 1
 
 char *configfilename;
 int lineno = 1;
@@ -89,6 +90,8 @@ static void cfdebug_print __P((char *, char *, int));
 #define DECHO if (cfdebug) cfdebug_print(NULL, yytext, yyleng);
 #define DNOECHO if (cfdebug) cfdebug_print(NULL, "****", yyleng);
 %}
+
+%option nounput
 
 /* abbreviations */
 nl		\n
