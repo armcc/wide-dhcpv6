@@ -759,18 +759,23 @@ client6_ifctl(ifname, command)
 {
 	struct dhcp6_if *ifp;
 
-	if ((ifp = find_ifconfbyname(ifname)) == NULL) {
-		debug_printf(LOG_INFO, FNAME,
-		    "failed to find interface configuration for %s",
-		    ifname);
-		return (-1);
-	}
-
 	debug_printf(LOG_DEBUG, FNAME, "%s interface %s",
 	    command == DHCP6CTL_COMMAND_START ? "start" : "stop", ifname);
 
 	switch(command) {
 	case DHCP6CTL_COMMAND_START:
+		/* If the interface does not (yet) exist, attempt to create it */
+		if ((ifp = find_ifconfbyname(ifname)) == NULL) {
+			debug_printf(LOG_INFO, FNAME,
+			    "attempting to create new interface %s",
+			    ifname);
+			if ((ifp = ifinit(ifname)) == NULL) {
+				debug_printf(LOG_ERR, FNAME,
+				    "failed to initialize interface %s",
+				    ifname);
+				return (-1);
+			}
+		}
 		/*
 		 * The ifid might have changed, so reset it before releasing the
 		 * lease.
@@ -788,6 +793,12 @@ client6_ifctl(ifname, command)
 		}
 		break;
 	case DHCP6CTL_COMMAND_STOP:
+		if ((ifp = find_ifconfbyname(ifname)) == NULL) {
+			debug_printf(LOG_INFO, FNAME,
+			    "failed to find interface configuration for %s",
+			    ifname);
+			return (-1);
+		}
 		free_resources(ifp);
 		if (ifp->timer != NULL) {
 			debug_printf(LOG_DEBUG, FNAME,
