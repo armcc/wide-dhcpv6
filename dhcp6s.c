@@ -2,7 +2,7 @@
 /*
  * Copyright (C) 1998 and 1999 WIDE Project.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -14,7 +14,7 @@
  * 3. Neither the name of the project nor the names of its contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE PROJECT AND CONTRIBUTORS ``AS IS'' AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -392,7 +392,7 @@ server6_init()
 
 	if (dhcp6_ctl_authinit(ctlkeyfile, &ctlkey, &ctldigestlen) != 0) {
 		debug_printf(LOG_NOTICE, FNAME,
-		    "failed to initialize control message authentication");
+			"failed to initialize control message authentication");
 		/* run the server anyway */
 	}
 
@@ -607,7 +607,7 @@ server6_mainloop()
 	fd_set r;
 	int maxsock;
 
-	
+
 	while (1) {
 		if (sig_flags)
 			process_signals();
@@ -814,7 +814,7 @@ server6_do_ctlcommand(buf, len)
 			}
 		}
 		remove_binding(binding);
-		    
+
 		break;
 	default:
 		debug_printf(LOG_INFO, FNAME,
@@ -823,7 +823,7 @@ server6_do_ctlcommand(buf, len)
 		return (DHCP6CTL_R_FAILURE);
 	}
 
-  	return (DHCP6CTL_R_DONE);
+	return (DHCP6CTL_R_DONE);
 }
 
 static void
@@ -903,7 +903,7 @@ server6_recv(s)
 		return;
 	}
 	/*
-	 * DHCPv6 server may receive a DHCPv6 packet from a non-listening 
+	 * DHCPv6 server may receive a DHCPv6 packet from a non-listening
 	 * interface, when a DHCPv6 relay agent is running on that interface.
 	 * This check prevents such reception.
 	 */
@@ -950,7 +950,7 @@ server6_recv(s)
 		debug_printf(LOG_INFO, FNAME, "relay reply message from %s",
 		    addr2str((struct sockaddr *)&from));
 		return;
-		
+
 	}
 
 	optend = (struct dhcp6opt *)(rdatabuf + len);
@@ -1367,7 +1367,7 @@ react_solicit(ifp, dh6, len, optinfo, from, fromlen, relayinfohead)
 			if ((client_conf = create_dynamic_hostconf(&optinfo->clientID,
 				&ifp->pool)) == NULL)
 				debug_printf(LOG_NOTICE, FNAME,
-			    	"failed to make host configuration");
+				"failed to make host configuration");
 		}
 		TAILQ_INIT(&conflist);
 
@@ -1520,7 +1520,7 @@ react_request(ifp, pi, dh6, len, optinfo, from, fromlen, relayinfohead)
 	 * See if we have to make a binding of some configuration information
 	 * for the client.
 	 */
-	
+
 	/*
 	 * When a delegating router receives a Request message from a
 	 * requesting router that contains an IA_PD option, and the delegating
@@ -1582,7 +1582,7 @@ react_request(ifp, pi, dh6, len, optinfo, from, fromlen, relayinfohead)
 			if ((client_conf = create_dynamic_hostconf(&optinfo->clientID,
 				&ifp->pool)) == NULL)
 				debug_printf(LOG_NOTICE, FNAME,
-			    	"failed to make host configuration");
+				"failed to make host configuration");
 		}
 		TAILQ_INIT(&conflist);
 
@@ -1590,7 +1590,7 @@ react_request(ifp, pi, dh6, len, optinfo, from, fromlen, relayinfohead)
 		if (client_conf &&
 		    dhcp6_copy_list(&conflist, &client_conf->addr_list)) {
 			debug_printf(LOG_NOTICE, FNAME,
-			    "failed to make local data");
+				"failed to make local data");
 			goto fail;
 		}
 
@@ -2204,7 +2204,7 @@ react_confirm(ifp, pi, dh6, len, optinfo, from, fromlen, relayinfohead)
 		if ((client_conf = create_dynamic_hostconf(&optinfo->clientID,
 			&ifp->pool)) == NULL) {
 			debug_printf(LOG_NOTICE, FNAME,
-		    	"failed to make host configuration");
+			"failed to make host configuration");
 			goto fail;
 		}
 	}
@@ -2234,13 +2234,13 @@ react_confirm(ifp, pi, dh6, len, optinfo, from, fromlen, relayinfohead)
 		}
 
 		/*
-		 * check whether the confirmed prefix matches 
+		 * check whether the confirmed prefix matches
 		 * the prefix from where the message originates.
 		 * XXX: prefix length is assumed to be 64
 		 */
 		for (iaaddr = TAILQ_FIRST(&iana->sublist); iaaddr;
 		    iaaddr = TAILQ_NEXT(iaaddr, link)) {
-		
+
 			struct in6_addr *confaddr = &iaaddr->val_statefuladdr6.addr;
 			struct in6_addr *linkaddr;
 			struct sockaddr_in6 *src = (struct sockaddr_in6 *)from;
@@ -2274,7 +2274,7 @@ react_confirm(ifp, pi, dh6, len, optinfo, from, fromlen, relayinfohead)
 		}
 	}
 
-	/* 
+	/*
 	 * even when the given address seems to be on the appropriate link,
 	 * the confirm should be ignore if there's no corrensponding IA-NA
 	 * configuration.
@@ -2644,7 +2644,7 @@ decline_binding_ia(iap, retlist, optinfo)
 	}
 
 	/*
-	 * If the IAs in the message are in a binding for the client and the 
+	 * If the IAs in the message are in a binding for the client and the
 	 * addresses in the IAs have been assigned by the server to those IAs,
 	 * the server deletes the addresses from the IAs and makes the addresses
 	 * available for assignment to other clients. [RFC3315 Section 18.2.7]
@@ -3399,7 +3399,7 @@ binding_timo(arg)
 				    in6addr2str(&iav->val_prefix6.addr, 0),
 				    iav->val_prefix6.plen,
 				    bindingstr(binding));
-				if (binding->iatype == DHCP6_LISTVAL_IANA) 
+				if (binding->iatype == DHCP6_LISTVAL_IANA)
 					release_address(&iav->val_prefix6.addr);
 				TAILQ_REMOVE(ia_list, iav, link);
 				dhcp6_clear_listval(iav);
@@ -3544,7 +3544,7 @@ process_auth(dh6, len, client_conf, optinfo, roptinfo)
 				    "authentication information "
 				    "provided in solicit from %s",
 				    clientstr(client_conf,
-				    &optinfo->clientID)); 
+				    &optinfo->clientID));
 				/* accept it anyway. (or discard?) */
 			}
 		} else {

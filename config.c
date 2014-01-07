@@ -314,7 +314,7 @@ static int configure_interface_or_profile(ifp, conflist)
 					debug_printf(LOG_ERR, FNAME, "%s:%d "
 						"pool '%s' not found",
 						configfilename, cfl->line,
-				   		spec->name);
+						spec->name);
 					return (-1);
 				}
 				if (spec->vltime != DHCP6_DURATION_INFINITE &&
@@ -344,7 +344,7 @@ static int configure_interface_or_profile(ifp, conflist)
 			return (-1);
 		}
 	}
-	
+
 	return (0);
 }
 
@@ -521,7 +521,7 @@ add_pd_pif(iapdc, cfl0)
 			if (pif->sla_len < 0 || pif->sla_len > 128) {
 				debug_printf(LOG_ERR, FNAME, "%s:%d "
 				    "invalid SLA length: %d",
-				    configfilename, cfl->line, pif->sla_len); 
+				    configfilename, cfl->line, pif->sla_len);
 				goto bad;
 			}
 			break;
@@ -651,7 +651,7 @@ configure_host(hostlist)
 						debug_printf(LOG_ERR, FNAME, "%s:%d "
 							"pool '%s' not found",
 							configfilename, cfl->line,
-					   		spec->name);
+							spec->name);
 						goto bad;
 					}
 					if (spec->vltime != DHCP6_DURATION_INFINITE &&
@@ -795,7 +795,7 @@ configure_keys(keylist)
 					    "for secret");
 					goto bad;
 				}
-				memcpy(kinfo->secret, secret, secretlen); 
+				memcpy(kinfo->secret, secret, secretlen);
 				kinfo->secretlen = secretlen;
 				break;
 			case KEYPARAM_EXPIRE:
@@ -847,7 +847,7 @@ configure_keys(keylist)
 				}
 				lt = localtime(&now);
 				lt->tm_sec = 0;
-				
+
 				if (strptime(expire, "%Y-%m-%d %H:%M", lt)
 				    == NULL &&
 				    strptime(expire, "%m-%d %H:%M", lt)
@@ -1355,7 +1355,7 @@ configure_commit()
 			free(ifp->scriptpath);
 		ifp->scriptpath = NULL;
 		ifp->authproto = DHCP6_AUTHPROTO_UNDEF;
-		ifp->authalgorithm = DHCP6_AUTHALG_UNDEF; 
+		ifp->authalgorithm = DHCP6_AUTHALG_UNDEF;
 		ifp->authrdm = DHCP6_AUTHRDM_UNDEF;
 
 		for (ifc = dhcp6_ifconflist; ifc; ifc = ifc->next) {
@@ -1637,7 +1637,7 @@ add_options(opcode, ifc, cfl0)
 				    configfilename, cfl->line, ifc->ifname);
 				return (-1);
 			}
-			ifc->authinfo = ainfo; 
+			ifc->authinfo = ainfo;
 			break;
 		case DHCPOPT_IA_PD:
 			switch (opcode) {
@@ -2098,7 +2098,7 @@ create_dynamic_hostconf(duid, pool)
 
 	dynconf->host = host;
 	TAILQ_INSERT_HEAD(&dynamic_hostconf_head, dynconf, link);
-	dynamic_hostconf_count++; 
+	dynamic_hostconf_count++;
 
 	debug_printf(LOG_DEBUG, FNAME, "created host_conf (name=%s)", host->name);
 
@@ -2178,7 +2178,7 @@ find_pool(name)
 	const char *name;
 {
 	struct pool_conf *pool = NULL;
-	
+
 	if (!name)
 		return (NULL);
 
@@ -2253,7 +2253,7 @@ is_available_in_pool(pool, addr)
 	return (0);
 }
 
-static int 
+static int
 in6_addr_cmp(addr1, addr2)
 	struct in6_addr *addr1, *addr2;
 {
@@ -2261,7 +2261,7 @@ in6_addr_cmp(addr1, addr2)
 
 	for (i = 0; i < 16; i++) {
 		if (addr1->s6_addr[i] != addr2->s6_addr[i]) {
-        	if (addr1->s6_addr[i] > addr2->s6_addr[i])
+		if (addr1->s6_addr[i] > addr2->s6_addr[i])
 				return (1);
 			else
 				return (-1);

@@ -126,7 +126,7 @@ update_address(ia, addr, dhcpifp, ctlp, callback)
 	/*
 	 * A client discards any addresses for which the preferred
          * lifetime is greater than the valid lifetime.
-	 * [RFC3315 22.6] 
+	 * [RFC3315 22.6]
 	 */
 	if (addr->vltime != DHCP6_DURATION_INFINITE &&
 	    (addr->pltime == DHCP6_DURATION_INFINITE ||

@@ -2,7 +2,7 @@
 /*
  * Copyright (C) 1998 and 1999 WIDE Project.
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
  * are met:
@@ -14,7 +14,7 @@
  * 3. Neither the name of the project nor the names of its contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE PROJECT AND CONTRIBUTORS ``AS IS'' AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -219,7 +219,7 @@ main(argc, argv)
 	setloglevel(debug);
 
 	client6_init();
-	while (argc-- > 0) { 
+	while (argc-- > 0) {
 		if ((ifp = ifinit(argv[0])) == NULL) {
 			debug_printf(LOG_ERR, FNAME, "failed to initialize %s",
 			    argv[0]);
@@ -734,7 +734,7 @@ client6_do_ctlcommand(buf, len)
 		return (DHCP6CTL_R_FAILURE);
 	}
 
-  	return (DHCP6CTL_R_DONE);
+	return (DHCP6CTL_R_DONE);
 }
 
 static void
@@ -1007,7 +1007,7 @@ construct_confdata(ifp, ev)
 	if (ial)
 		free(ial);
 	dhcp6_remove_event(ev);	/* XXX */
-	
+
 	return (-1);
 }
 
@@ -1103,7 +1103,7 @@ construct_reqdata(ifp, optinfo, ev)
 	if (ial)
 		free(ial);
 	dhcp6_remove_event(ev);	/* XXX */
-	
+
 	return (-1);
 }
 
@@ -1272,7 +1272,7 @@ client6_send(ev)
 			/*
 			 * Perhaps we are nervous too much, but without this
 			 * additional check, we would see an overflow in 248
-			 * days (of no responses). 
+			 * days (of no responses).
 			 */
 			et = MAX_ELAPSED_TIME;
 		} else {
@@ -1540,7 +1540,7 @@ client6_recvadvert(ifp, dh6, len, optinfo)
 	 * includes a Status Code option containing the value NoPrefixAvail
 	 * [RFC3633 Section 11.1].
 	 * Likewise, the client MUST ignore any Advertise message that includes
-	 * a Status Code option containing the value NoAddrsAvail. 
+	 * a Status Code option containing the value NoAddrsAvail.
 	 * [RFC3315 Section 17.1.3].
 	 * We only apply this when we are going to request an address or
 	 * a prefix.

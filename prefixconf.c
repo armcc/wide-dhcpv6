@@ -145,7 +145,7 @@ update_prefix(ia, pinfo, pifc, dhcpifp, ctlp, callback)
 	/*
 	 * A client discards any addresses for which the preferred
          * lifetime is greater than the valid lifetime.
-	 * [RFC3315 22.6] 
+	 * [RFC3315 22.6]
 	 */
 	if (pinfo->vltime != DHCP6_DURATION_INFINITE &&
 	    (pinfo->pltime == DHCP6_DURATION_INFINITE ||
@@ -521,6 +521,6 @@ pd_ifaddrconf(cmd, ifpfx)
 	struct prefix_ifconf *pconf;
 
 	pconf = ifpfx->ifconf;
-	return (ifaddrconf(cmd, pconf->ifname, &ifpfx->ifaddr, ifpfx->plen, 
+	return (ifaddrconf(cmd, pconf->ifname, &ifpfx->ifaddr, ifpfx->plen,
 	    ND6_INFINITE_LIFETIME, ND6_INFINITE_LIFETIME));
 }

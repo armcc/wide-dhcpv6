@@ -309,7 +309,7 @@ reestablish_ia(ia)
 	struct dhcp6_event *ev;
 	struct dhcp6_eventdata *evd;
 
-	debug_printf(LOG_DEBUG, FNAME, "re-establishing IA: %s-%lu", 
+	debug_printf(LOG_DEBUG, FNAME, "re-establishing IA: %s-%lu",
 	    iastr(ia->conf->type), ia->conf->iaid);
 
 	if (ia->state != IAS_RENEW && ia->state != IAS_REBIND) {
