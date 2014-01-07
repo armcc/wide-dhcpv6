@@ -1305,7 +1305,9 @@ gethwid(buf, len, ifname, hwtypep)
 		return (l);
 	}
 
+#ifdef __KAME__
   fail:
+#endif
 	freeifaddrs(ifap);
 	return (-1);
 }
