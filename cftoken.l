@@ -49,7 +49,7 @@
 #include "dhcp6.h"
 #include "config.h"
 #include "common.h"
-#include "y.tab.h"
+#include "cfparse.h"
 
 #define YY_NO_UNPUT 1
 

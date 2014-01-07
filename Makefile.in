@@ -61,7 +61,7 @@ SERVOBJS=	dhcp6s.o common.o if.o config.o timer.o lease.o \
 	base64.o auth.o dhcp6_ctl.o $(GENSRCS:%.c=%.o)
 RELAYOBJS =	dhcp6relay.o dhcp6relay_script.o common.o timer.o
 CTLOBJS= dhcp6_ctlclient.o base64.o auth.o
-CLEANFILES+=	y.tab.h
+CLEANFILES+=	cfparse.h
 
 all:	$(TARGET)
 dhcp6c:	$(CLIENTOBJS) $(LIBOBJS)
@@ -73,13 +73,11 @@ dhcp6relay: $(RELAYOBJS) $(LIBOBJS)
 dhcp6ctl: $(CTLOBJS)
 	$(CC) $(LDFLAGS) -o $@ $(CTLOBJS) $(LIBOBJS) $(LIBS)
 
-cfparse.c y.tab.h: cfparse.y
-	@YACC@ -d cfparse.y
-	mv y.tab.c cfparse.c
+cfparse.c: cfparse.y
+	@YACC@ -o $@ -d $<
 
-cftoken.c: cftoken.l y.tab.h
-	@LEX@ cftoken.l
-	mv lex.yy.c $@	
+cftoken.c: cftoken.l cfparse.c
+	@LEX@ -o $@ $<
 
 getaddrinfo.o:	$(srcdir)/missing/getaddrinfo.c
 	$(CC) -c $(srcdir)/missing/$*.c
