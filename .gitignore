@@ -1,0 +1,32 @@
+# Object files
+*.o
+*.ko
+
+# Libraries
+*.lib
+*.a
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# wide-dhcpv6 bison/flex generated files
+cftoken.c
+cftoken.h
+cfparse.c
+y.tab.h
+y.tab.c
+lex.yy.c
+
+# wide-dhcpv6 executables
+dhcp6c
+dhcp6ctl
+dhcp6relay
+dhcp6s
