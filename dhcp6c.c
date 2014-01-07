@@ -722,7 +722,7 @@ client6_do_ctlcommand(buf, len)
 				break;
 			default:
 				debug_printf(LOG_INFO, FNAME,
-				    "unknown start target: %ul", p32);
+				    "unknown stop target: %ul", p32);
 				return (DHCP6CTL_R_FAILURE);
 			}
 		}
