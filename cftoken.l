@@ -72,6 +72,7 @@ static int yy_first_time = 1;
 static int yyerrorcount = 0;
  
 #ifndef NOCONFIG_DEBUG
+#undef YYDEBUG
 #define YYDEBUG 1
 
 int cfdebug = 1;
