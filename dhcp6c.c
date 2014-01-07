@@ -604,7 +604,7 @@ get_ifname(bpp, lenp, ifbuf, ifbuflen)
 	if (*lenp < ifnamelen || ifnamelen > ifbuflen)
 		return (-1);
 
-	memset(ifbuf, 0, sizeof(ifbuf));
+	memset(ifbuf, 0, ifbuflen);
 	memcpy(ifbuf, *bpp, ifnamelen);
 	if (ifbuf[ifbuflen - 1] != '\0')
 		return (-1);	/* not null terminated */
