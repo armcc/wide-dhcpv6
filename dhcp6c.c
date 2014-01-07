@@ -204,11 +204,6 @@ main(argc, argv)
 	argc -= optind;
 	argv += optind;
 
-	if (argc == 0) {
-		usage();
-		exit(0);
-	}
-
 	if (foreground == 0) {
 		for (fd = 3; fd < 1024; fd++)
 			close(fd);
@@ -217,6 +212,11 @@ main(argc, argv)
 	}
 
 	setloglevel(debug);
+
+	if (argc == 0) {
+		debug_printf(LOG_WARNING, FNAME,
+			"starting with no active interfaces");
+	}
 
 	client6_init();
 	while (argc-- > 0) {
