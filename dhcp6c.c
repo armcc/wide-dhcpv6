@@ -946,7 +946,7 @@ construct_confdata(ifp, ev)
 			    "failed to create a new event data");
 			goto fail;
 		}
-		memset(evd, 0, sizeof(evd));
+		memset(evd, 0, sizeof(*evd));
 
 		memset(&iaparam, 0, sizeof(iaparam));
 		iaparam.iaid = iac->iaid;
