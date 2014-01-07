@@ -80,7 +80,7 @@
 #define DUID_FILE LOCALDBDIR "/dhcp6s_duid"
 #define DHCP6S_CONF SYSCONFDIR "/dhcp6s.conf"
 #define DEFAULT_KEYFILE SYSCONFDIR "/dhcp6sctlkey"
-#define DHCP6S_PIDFILE "/var/run/dhcp6s.pid"
+#define DHCP6S_PIDFILE "/run/wide-dhcpv6/dhcp6s.pid"
 
 #define CTLSKEW 300
 

@@ -29,7 +29,7 @@
  * SUCH DAMAGE.
  */
 #define DHCP6C_CONF SYSCONFDIR "/dhcp6c.conf"
-#define DHCP6C_PIDFILE "/var/run/dhcp6c.pid"
+#define DHCP6C_PIDFILE "/run/wide-dhcpv6/dhcp6c.pid"
 #define DUID_FILE LOCALDBDIR "/dhcp6c_duid"
 
 extern struct dhcp6_timer *client6_timo __P((void *));
