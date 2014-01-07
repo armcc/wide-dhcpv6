@@ -59,9 +59,20 @@ u_int32_t
 arc4random()
 {
 	u_int32_t v;
+	size_t l = 0;
 
 	if (fd < 0)
 		arc4random_init();
-	read(fd, &v, sizeof(v));
+
+	while (l < sizeof(v)) {
+	    ssize_t result = read(fd, ((char*)&v) + l, (sizeof(v)) - l);
+	    if (result < 0)
+	        {
+	            /* Unlikely, but unhandleable error, return what we have */
+	            return v;
+	        }
+	    l += result;
+	}
+
 	return v;
 }
