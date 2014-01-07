@@ -142,8 +142,8 @@ dhcp6_calc_mac(buf, len, proto, alg, off, key)
 		return (-1);
 	}
 
-	hmacmd5_init(&ctx, key->secret, key->secretlen);
-	hmacmd5_update(&ctx, buf, len);
+	hmacmd5_init(&ctx, (unsigned char*)key->secret, key->secretlen);
+	hmacmd5_update(&ctx, (unsigned char*)buf, len);
 	hmacmd5_sign(&ctx, digest);
 
 	memcpy(buf + off, digest, MD5_DIGESTLENGTH);
@@ -178,8 +178,8 @@ dhcp6_verify_mac(buf, len, proto, alg, off, key)
 	memcpy(digest, buf + off, sizeof(digest));
 	memset(buf + off, 0, sizeof(digest));
 
-	hmacmd5_init(&ctx, key->secret, key->secretlen);
-	hmacmd5_update(&ctx, buf, len);
+	hmacmd5_init(&ctx, (unsigned char*)key->secret, key->secretlen);
+	hmacmd5_update(&ctx, (unsigned char*)buf, len);
 	result = hmacmd5_verify(&ctx, digest);
 
 	/* copy back the digest value (XXX) */
